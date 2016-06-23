@@ -22,6 +22,15 @@ class Register extends Component {
     };
   }
 
+  redirect(routeName, token) {
+    this.props.navigator.push({
+      name: routeName,
+      passProps: {
+        accessToken: token,
+      },
+    });
+  }
+
   /**
    * Note about bind(this):
    *   If you called onRegisterPress without bind(this), *this* would refer to
