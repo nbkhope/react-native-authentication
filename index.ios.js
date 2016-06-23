@@ -28,9 +28,9 @@ class MyApp extends Component {
     else if (route.name === 'register') {
       return <Register navigator={navigator} />
     }
-    // else if (route.name === 'login') {
-    //   return <Login navigator={navigator} />
-    // }
+    else if (route.name === 'home') {
+      return <Home navigator={navigator} {...route.passProps} />
+    }
   }
 
   render() {
