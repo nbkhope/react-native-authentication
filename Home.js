@@ -31,6 +31,10 @@ class Home extends Component {
           Welcome back to our System!
         </Text>
 
+        <Text>
+          Your access token is {this.state.accessToken}
+        </Text>
+
         <TouchableHighlight
           style={styles.submitButton}
           onPress={this.onLogoutPress.bind(this)}
