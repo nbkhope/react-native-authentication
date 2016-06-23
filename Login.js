@@ -23,6 +23,15 @@ class Login extends Component {
     };
   }
 
+  redirect(routeName, token) {
+    this.props.navigator.push({
+      name: routeName,
+      passProps: {
+        accessToken: token,
+      },
+    });
+  }
+
   /**
    * Stores the given access token in the AsyncStorage
    */
@@ -91,6 +100,9 @@ class Login extends Component {
         let accessToken = res;
         this.storeToken(accessToken);
         console.log("Stored access token in AsyncStorage.");
+
+        // Redirect to home, passing the access token along
+        this.redirect('home', accessToken);
       }
       else { // error in login
         console.log("res (error): " + res);
@@ -104,7 +116,7 @@ class Login extends Component {
       this.setState({ error: error });
 
       // Remove token
-      this.remoteToken();
+      this.removeToken();
     }
   }
 
