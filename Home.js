@@ -7,8 +7,8 @@ import {
 } from 'react-native';
 
 class Home extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       accessToken: this.props.accessToken,
