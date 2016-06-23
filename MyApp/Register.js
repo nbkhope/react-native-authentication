@@ -94,23 +94,34 @@ class Register extends Component {
           placeholder="Email"
           style={styles.inputText}
           onChangeText={(text) => this.setState({ email: text })}
+          autoCapitalize='none'
+          autoCorrect={false}
+          autoFocus={true}
+          keyboardType='email-address'
+          returnKeyType='next'
         />
         <TextInput
           placeholder="Name"
           style={styles.inputText}
           onChangeText={(text) => this.setState({ name: text })}
+          returnKeyType='next'
         />
         <TextInput
           placeholder="Password"
           style={styles.inputText}
           onChangeText={(text) => this.setState({ password: text })}
           secureTextEntry={true}
+          autoCapitalize='none'
+          autoCorrect={false}
+          returnKeyType='next'
         />
         <TextInput
           placeholder="Confirm Password"
           style={styles.inputText}
           onChangeText={(text) => this.setState({ password_confirmation: text })}
           secureTextEntry={true}
+          autoCapitalize='none'
+          autoCorrect={false}
         />
 
         <TouchableHighlight
@@ -147,6 +158,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
+    marginBottom: 10,
   },
   inputText: {
     backgroundColor: "#8D79AE",
