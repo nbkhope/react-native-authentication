@@ -15,10 +15,31 @@ import {
 import Register from './Register';
 
 class MyApp extends Component {
+  /**
+   * Defines all the routes for the application
+   */
+  renderScene(route, navigator) {
+    if (route.name === 'root') {
+      return <Root navigator={navigator} />
+    }
+    else if (route.name === 'login') {
+      return <Login navigator={navigator} />
+    }
+    else if (route.name === 'register') {
+      return <Register navigator={navigator} />
+    }
+    // else if (route.name === 'login') {
+    //   return <Login navigator={navigator} />
+    // }
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Register />
+        <Navigator
+          initialRoute={{ name: 'root' }}
+          renderScene={this.renderScene.bind(this)}
+        />
       </View>
     );
   }
