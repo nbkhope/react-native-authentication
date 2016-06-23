@@ -9,16 +9,23 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Navigator,
 } from 'react-native';
 
+import Root from './Root';
+import Login from './Login';
 import Register from './Register';
+import Home from './Home';
 
 class MyApp extends Component {
   /**
    * Defines all the routes for the application
    */
   renderScene(route, navigator) {
+    // For debug purposes
+    console.log(route);
+
     if (route.name === 'root') {
       return <Root navigator={navigator} />
     }
