@@ -65,6 +65,8 @@ class Register extends Component {
         // Registration was successful
         console.log("res: " + res);
 
+        let accessToken = res;
+
         // Allow user to be taken to home without
         // having to login after registration
         this.redirect('home', accessToken);
