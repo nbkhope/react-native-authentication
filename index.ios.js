@@ -13,6 +13,7 @@ import {
   Navigator,
 } from 'react-native';
 
+// Import all custom components here
 import Root from './Root';
 import Login from './Login';
 import Register from './Register';
