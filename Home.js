@@ -6,6 +6,8 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
+const ACCESS_TOKEN = 'access_token';
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -15,19 +17,28 @@ class Home extends Component {
     };
   }
 
-  // redirect(routeName, token) {
-  //   this.props.navigator.push({
-  //     name: routeName,
-  //     passProps: {
-  //       accessToken: token,
-  //     },
-  //   });
-  // }
+  redirect(routeName) {
+    this.props.navigator.push({
+      name: routeName,
+    });
+  }
+
+  async deleteToken() {
+    try {
+      await AsyncStorage.removeItem(ACCESS_TOKEN);
+    }
+    catch(error) {
+      console.log("Failed to delete token.");
+    }
+
+  }
 
   onLogoutPress() {
-    this.props.navigator.push({
-      name: 'root',
-    });
+    // wipes out the access token from AsyncStorage
+    this.deleteToken();
+
+    // Redirect to the root view
+    this.redirect('root');
   }
 
   render() {
