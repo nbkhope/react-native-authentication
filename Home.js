@@ -24,6 +24,10 @@ class Home extends Component {
   //   });
   // }
 
+  onLogoutPress() {
+    
+  }
+
   render() {
     return (
       <View style={styles.container}>
