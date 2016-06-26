@@ -18,7 +18,7 @@ import Login from './Login';
 import Register from './Register';
 import Home from './Home';
 
-class MyApp extends Component {
+class AuthApp extends Component {
   /**
    * Defines all the routes for the application
    */
@@ -42,12 +42,10 @@ class MyApp extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Navigator
-          initialRoute={{ name: 'root' }}
-          renderScene={this.renderScene.bind(this)}
-        />
-      </View>
+      <Navigator
+        initialRoute={{ name: 'root' }}
+        renderScene={this.renderScene.bind(this)}
+      />
     );
   }
 }
@@ -66,4 +64,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('MyApp', () => MyApp);
+AppRegistry.registerComponent('AuthApp', () => AuthApp);
