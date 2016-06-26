@@ -27,7 +27,9 @@ class Login extends Component {
     this.props.navigator.push({
       name: routeName,
       passProps: {
-        accessToken: token,
+        accessToken: token, // pass the token as a property
+                            //(accessToken will be available in this.props of
+                            // the component that will be loaded)
       },
     });
   }
