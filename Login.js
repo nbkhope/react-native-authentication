@@ -5,20 +5,21 @@ import {
   View,
   TextInput,
   TouchableHighlight,
+  AsyncStorage,
 } from 'react-native';
 
-class Register extends Component {
+const ACCESS_TOKEN = 'access_token';
+
+class Login extends Component {
   constructor() {
     super();
 
     // Initialize the state of the component
     // Form fields should all be initialized here
     this.state = {
-      name: "",
       email: "",
       password: "",
-      password_confirmation: "",
-      errors: [],
+      error: "",
     };
   }
 
@@ -26,35 +27,64 @@ class Register extends Component {
     this.props.navigator.push({
       name: routeName,
       passProps: {
-        accessToken: token,
+        accessToken: token, // pass the token as a property
+                            //(accessToken will be available in this.props of
+                            // the component that will be loaded)
       },
     });
   }
 
   /**
-   * Note about bind(this):
-   *   If you called onRegisterPress without bind(this), *this* would refer to
-   *   the button itself (TouchableHighlight). If you do that and you try to
-   *   refer to some property of the current component using this.state, it
-   *   will not work. In order for you to get access to the state, you have to
-   *   change the context of *this* to the actual outer component you are using.
-   *   You can do that using onRegisterPress.bind(this)
+   * Stores the given access token in the AsyncStorage
    */
-
-  async onRegisterPress() {
+  async storeToken(accessToken) {
     try {
-      let response = await fetch('https://afternoon-beyond-22141.herokuapp.com/api/users', {
+      await AsyncStorage.setItem(ACCESS_TOKEN, accessToken);
+      this.getToken();
+    }
+    catch(error) {
+      console.log("Error! Something went terribly wrong.");
+    }
+  }
+
+  /**
+   * Retrieves the access token from the AsyncStorage
+   */
+  async getToken() {
+    try {
+      let token = await AsyncStorage.getItem(ACCESS_TOKEN);
+      console.log("The stored access token is " + token);
+    }
+    catch(error) {
+      console.log("Error! Something went terribly wrong when retrieve the access token.");
+    }
+  }
+
+  /**
+   * Removes access token from the AsyncStorage
+   */
+  async removeToken() {
+    try {
+      await AsyncStorage.removeItem(ACCESS_TOKEN);
+      this.getToken();
+    }
+    catch (error) {
+      console.log("Oops... could not remove token.");
+    }
+  }
+
+  async onLoginPress() {
+    try {
+      let response = await fetch('https://afternoon-beyond-22141.herokuapp.com/api/login', {
         method: "POST",
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          user: {
-            name: this.state.name,
+          session: {
             email: this.state.email,
             password: this.state.password,
-            password_confirmation: this.state.password_confirmation,
           }
         }),
       });
@@ -62,39 +92,33 @@ class Register extends Component {
       let res = await response.text();
 
       if (response.status >= 200 && response.status < 300) {
-        // Registration was successful
+        // Login was successful
         console.log("res: " + res);
 
-        let accessToken = res;
+        // Clear up the error state
+        this.setState({ error: "" });
 
-        // Allow user to be taken to home without
-        // having to login after registration
+        // Set up the access token
+        let accessToken = res;
+        this.storeToken(accessToken);
+        console.log("Stored access token in AsyncStorage.");
+
+        // Redirect to home, passing the access token along
         this.redirect('home', accessToken);
       }
-      else { // error in registration
+      else { // error in login
         console.log("res (error): " + res);
         let errors = res;
         throw errors;
       }
     }
-    catch(errors) {
-      console.log("Errors were caught!");
+    catch(error) {
+      console.log("An error was caught!");
 
-      let formErrors = JSON.parse(errors);
-      let errorsArray = [];
+      this.setState({ error: error });
 
-      // Populate the errorsArray by going through the errors received from
-      // the backend
-      for (var key in formErrors) {
-        if (formErrors[key].length > 1) {
-          formErrors[key].map(error => errorsArray.push(`${key} ${error}`));
-        }
-        else {
-          errorsArray.push(`${key} ${formErrors[key]}`);
-        }
-      }
-
-      this.setState({ errors: errorsArray });
+      // Remove token
+      this.removeToken();
     }
   }
 
@@ -102,7 +126,7 @@ class Register extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>
-          Register an Account
+          Please Login
         </Text>
 
         <TextInput
@@ -116,24 +140,9 @@ class Register extends Component {
           returnKeyType='next'
         />
         <TextInput
-          placeholder="Name"
-          style={styles.inputText}
-          onChangeText={(text) => this.setState({ name: text })}
-          returnKeyType='next'
-        />
-        <TextInput
           placeholder="Password"
           style={styles.inputText}
           onChangeText={(text) => this.setState({ password: text })}
-          secureTextEntry={true}
-          autoCapitalize='none'
-          autoCorrect={false}
-          returnKeyType='next'
-        />
-        <TextInput
-          placeholder="Confirm Password"
-          style={styles.inputText}
-          onChangeText={(text) => this.setState({ password_confirmation: text })}
           secureTextEntry={true}
           autoCapitalize='none'
           autoCorrect={false}
@@ -141,27 +150,18 @@ class Register extends Component {
 
         <TouchableHighlight
           style={styles.submitButton}
-          onPress={this.onRegisterPress.bind(this)}
+          onPress={this.onLoginPress.bind(this)}
         >
           <Text style={styles.buttonText}>
-            Register
+            Login
           </Text>
         </TouchableHighlight>
 
-        <Errors errors={this.state.errors} />
+        <Text>{this.state.error}</Text>
       </View>
     );
   }
 }
-
-// Stateless component to display the errors
-const Errors = (props) => {
-  return (
-    <View>
-      {props.errors.map((error, i) => <Text key={i} style={styles.error}>{error}</Text>)}
-    </View>
-  );
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -199,4 +199,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Register;
+export default Login;

@@ -9,17 +9,43 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Navigator,
 } from 'react-native';
 
+import Root from './Root';
+import Login from './Login';
 import Register from './Register';
+import Home from './Home';
 
-class MyApp extends Component {
+class AuthApp extends Component {
+  /**
+   * Defines all the routes for the application
+   */
+  renderScene(route, navigator) {
+    // For debug purposes
+    console.log(route);
+
+    if (route.name === 'root') {
+      return <Root navigator={navigator} />
+    }
+    else if (route.name === 'login') {
+      return <Login navigator={navigator} />
+    }
+    else if (route.name === 'register') {
+      return <Register navigator={navigator} />
+    }
+    else if (route.name === 'home') {
+      return <Home navigator={navigator} {...route.passProps} />
+    }
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Register />
-      </View>
+      <Navigator
+        initialRoute={{ name: 'root' }}
+        renderScene={this.renderScene.bind(this)}
+      />
     );
   }
 }
@@ -38,4 +64,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('MyApp', () => MyApp);
+AppRegistry.registerComponent('AuthApp', () => AuthApp);
