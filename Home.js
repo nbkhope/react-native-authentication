@@ -25,7 +25,9 @@ class Home extends Component {
   // }
 
   onLogoutPress() {
-    
+    this.props.navigator.push({
+      name: 'root',
+    });
   }
 
   render() {
