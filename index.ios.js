@@ -14,10 +14,10 @@ import {
 } from 'react-native';
 
 // Import all custom components here
-import Root from './Root';
-import Login from './Login';
-import Register from './Register';
-import Home from './Home';
+import Root from './components/Root';
+import Login from './components/Login';
+import Register from './components/Register';
+import Home from './components/Home';
 
 class AuthApp extends Component {
   /**
