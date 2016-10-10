@@ -1,18 +1,29 @@
 import React from 'react';
-import { TextInput } from 'react-native';
+import { TextInput, StyleSheet } from 'react-native';
 
 const Input = (props) => {
-  const { placeholder, onChangeText, autoFocus } = props;
+  const {
+    placeholder,
+    onChangeText,
+    autoFocus,
+    keyboardType,
+    returnKeyType,
+    secureTextEntry,
+    autoCapitalize,
+    autoCorrect,
+  } = props;
+
   return (
     <TextInput
       placeholder={placeholder}
       style={styles.inputText}
       onChangeText={onChangeText}
-      autoCapitalize='none'
-      autoCorrect={false}
+      autoCapitalize={autoCapitalize || 'none'}
+      autoCorrect={autoCorrect || false}
       autoFocus={autoFocus}
-      keyboardType='email-address'
-      returnKeyType='next'
+      keyboardType={keyboardType}
+      returnKeyType={returnKeyType}
+      secureTextEntry={secureTextEntry}
     />
   );
 };
