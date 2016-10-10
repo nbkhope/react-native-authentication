@@ -171,25 +171,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
   },
-  inputText: {
-    backgroundColor: "#8D79AE",
-    height: 50,
-    padding: 6,
-    borderWidth: 1,
-    borderColor: "#19053A",
-    marginBottom: 10,
-  },
-  submitButton: {
-    height: 50,
-    backgroundColor: "#482E74",
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-  },
-  buttonText: {
-    color: "#8D79AE",
-    alignSelf: 'center',
-    fontSize: 20,
-  },
   error: {
     color: "red",
   },
