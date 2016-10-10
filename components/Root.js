@@ -5,6 +5,7 @@ import {
   View,
   TouchableHighlight,
 } from 'react-native';
+import Button from './Button';
 
 const ACCESS_TOKEN = 'access_token';
 
@@ -73,23 +74,17 @@ class Root extends Component {
           Welcome!
         </Text>
 
-        <TouchableHighlight
-          style={styles.submitButton}
+        <Button
           onPress={this.navigate.bind(this, 'login')}
         >
-          <Text style={styles.buttonText}>
-            Login
-          </Text>
-        </TouchableHighlight>
+          Login
+        </Button>
 
-        <TouchableHighlight
-          style={styles.submitButton}
+        <Button
           onPress={this.navigate.bind(this, 'register')}
         >
-          <Text style={styles.buttonText}>
-            Register
-          </Text>
-        </TouchableHighlight>
+          Register
+        </Button>
       </View>
     );
   }
@@ -114,17 +109,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#19053A",
     marginBottom: 10,
-  },
-  submitButton: {
-    height: 50,
-    backgroundColor: "#482E74",
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-  },
-  buttonText: {
-    color: "#8D79AE",
-    alignSelf: 'center',
-    fontSize: 20,
   },
   error: {
     color: "red",
