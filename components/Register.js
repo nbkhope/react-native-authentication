@@ -7,6 +7,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import Button from './Button';
+import Input from './Input';
 
 class Register extends Component {
   constructor() {
@@ -106,38 +107,29 @@ class Register extends Component {
           Register an Account
         </Text>
 
-        <TextInput
+        <Input
           placeholder="Email"
-          style={styles.inputText}
           onChangeText={(text) => this.setState({ email: text })}
-          autoCapitalize='none'
-          autoCorrect={false}
           autoFocus={true}
           keyboardType='email-address'
           returnKeyType='next'
         />
-        <TextInput
+        <Input
           placeholder="Name"
-          style={styles.inputText}
           onChangeText={(text) => this.setState({ name: text })}
+          autoCapitalize="words"
           returnKeyType='next'
         />
-        <TextInput
+        <Input
           placeholder="Password"
-          style={styles.inputText}
           onChangeText={(text) => this.setState({ password: text })}
-          secureTextEntry={true}
-          autoCapitalize='none'
-          autoCorrect={false}
           returnKeyType='next'
+          secureTextEntry
         />
-        <TextInput
+        <Input
           placeholder="Confirm Password"
-          style={styles.inputText}
           onChangeText={(text) => this.setState({ password_confirmation: text })}
-          secureTextEntry={true}
-          autoCapitalize='none'
-          autoCorrect={false}
+          secureTextEntry
         />
 
         <Button
