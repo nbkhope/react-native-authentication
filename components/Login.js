@@ -7,6 +7,7 @@ import {
   TouchableHighlight,
   AsyncStorage,
 } from 'react-native';
+import Button from './Button';
 
 const ACCESS_TOKEN = 'access_token';
 
@@ -148,14 +149,17 @@ class Login extends Component {
           autoCorrect={false}
         />
 
-        <TouchableHighlight
-          style={styles.submitButton}
+        <Button
           onPress={this.onLoginPress.bind(this)}
         >
-          <Text style={styles.buttonText}>
-            Login
-          </Text>
-        </TouchableHighlight>
+          Login
+        </Button>
+
+        <Button
+          onPress={() => this.props.navigator.pop()}
+        >
+          Cancel
+        </Button>
 
         <Text>{this.state.error}</Text>
       </View>

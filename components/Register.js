@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableHighlight,
 } from 'react-native';
+import Button from './Button';
 
 class Register extends Component {
   constructor() {
@@ -139,14 +140,17 @@ class Register extends Component {
           autoCorrect={false}
         />
 
-        <TouchableHighlight
-          style={styles.submitButton}
+        <Button
           onPress={this.onRegisterPress.bind(this)}
         >
-          <Text style={styles.buttonText}>
-            Register
-          </Text>
-        </TouchableHighlight>
+          Register
+        </Button>
+
+        <Button
+          onPress={() => this.props.navigator.pop()}
+        >
+          Cancel
+        </Button>
 
         <Errors errors={this.state.errors} />
       </View>
