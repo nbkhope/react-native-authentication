@@ -5,7 +5,7 @@ import {
   View,
   TouchableHighlight,
 } from 'react-native';
-import Button from './Button';
+import { Button } from './common';
 
 const ACCESS_TOKEN = 'access_token';
 

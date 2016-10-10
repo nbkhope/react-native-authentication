@@ -6,8 +6,7 @@ import {
   TextInput,
   TouchableHighlight,
 } from 'react-native';
-import Button from './Button';
-import Input from './Input';
+import { Button, Input } from './common';
 
 class Register extends Component {
   constructor() {

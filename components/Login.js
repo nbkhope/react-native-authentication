@@ -7,8 +7,7 @@ import {
   TouchableHighlight,
   AsyncStorage,
 } from 'react-native';
-import Button from './Button';
-import Input from './Input';
+import { Button, Input } from './common';
 
 const ACCESS_TOKEN = 'access_token';
 
