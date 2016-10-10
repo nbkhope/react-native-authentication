@@ -7,6 +7,7 @@ import {
   TouchableHighlight,
   AsyncStorage,
 } from 'react-native';
+import { Button, Input } from './common';
 
 const ACCESS_TOKEN = 'access_token';
 
@@ -129,9 +130,8 @@ class Login extends Component {
           Please Login
         </Text>
 
-        <TextInput
+        <Input
           placeholder="Email"
-          style={styles.inputText}
           onChangeText={(text) => this.setState({ email: text })}
           autoCapitalize='none'
           autoCorrect={false}
@@ -139,23 +139,25 @@ class Login extends Component {
           keyboardType='email-address'
           returnKeyType='next'
         />
-        <TextInput
+        <Input
           placeholder="Password"
-          style={styles.inputText}
           onChangeText={(text) => this.setState({ password: text })}
-          secureTextEntry={true}
           autoCapitalize='none'
           autoCorrect={false}
+          secureTextEntry
         />
 
-        <TouchableHighlight
-          style={styles.submitButton}
+        <Button
           onPress={this.onLoginPress.bind(this)}
         >
-          <Text style={styles.buttonText}>
-            Login
-          </Text>
-        </TouchableHighlight>
+          Login
+        </Button>
+
+        <Button
+          onPress={() => this.props.navigator.pop()}
+        >
+          Cancel
+        </Button>
 
         <Text>{this.state.error}</Text>
       </View>
@@ -174,25 +176,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
-  },
-  inputText: {
-    backgroundColor: "#8D79AE",
-    height: 50,
-    padding: 6,
-    borderWidth: 1,
-    borderColor: "#19053A",
-    marginBottom: 10,
-  },
-  submitButton: {
-    height: 50,
-    backgroundColor: "#482E74",
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-  },
-  buttonText: {
-    color: "#8D79AE",
-    alignSelf: 'center',
-    fontSize: 20,
   },
   error: {
     color: "red",

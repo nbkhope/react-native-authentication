@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableHighlight,
 } from 'react-native';
+import { Button, Input } from './common';
 
 class Register extends Component {
   constructor() {
@@ -105,48 +106,42 @@ class Register extends Component {
           Register an Account
         </Text>
 
-        <TextInput
+        <Input
           placeholder="Email"
-          style={styles.inputText}
           onChangeText={(text) => this.setState({ email: text })}
-          autoCapitalize='none'
-          autoCorrect={false}
           autoFocus={true}
           keyboardType='email-address'
           returnKeyType='next'
         />
-        <TextInput
+        <Input
           placeholder="Name"
-          style={styles.inputText}
           onChangeText={(text) => this.setState({ name: text })}
+          autoCapitalize="words"
           returnKeyType='next'
         />
-        <TextInput
+        <Input
           placeholder="Password"
-          style={styles.inputText}
           onChangeText={(text) => this.setState({ password: text })}
-          secureTextEntry={true}
-          autoCapitalize='none'
-          autoCorrect={false}
           returnKeyType='next'
+          secureTextEntry
         />
-        <TextInput
+        <Input
           placeholder="Confirm Password"
-          style={styles.inputText}
           onChangeText={(text) => this.setState({ password_confirmation: text })}
-          secureTextEntry={true}
-          autoCapitalize='none'
-          autoCorrect={false}
+          secureTextEntry
         />
 
-        <TouchableHighlight
-          style={styles.submitButton}
+        <Button
           onPress={this.onRegisterPress.bind(this)}
         >
-          <Text style={styles.buttonText}>
-            Register
-          </Text>
-        </TouchableHighlight>
+          Register
+        </Button>
+
+        <Button
+          onPress={() => this.props.navigator.pop()}
+        >
+          Cancel
+        </Button>
 
         <Errors errors={this.state.errors} />
       </View>
@@ -174,25 +169,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
-  },
-  inputText: {
-    backgroundColor: "#8D79AE",
-    height: 50,
-    padding: 6,
-    borderWidth: 1,
-    borderColor: "#19053A",
-    marginBottom: 10,
-  },
-  submitButton: {
-    height: 50,
-    backgroundColor: "#482E74",
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-  },
-  buttonText: {
-    color: "#8D79AE",
-    alignSelf: 'center',
-    fontSize: 20,
   },
   error: {
     color: "red",
