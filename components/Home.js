@@ -5,6 +5,7 @@ import {
   View,
   TouchableHighlight,
 } from 'react-native';
+import Button from './Button';
 
 const ACCESS_TOKEN = 'access_token';
 
@@ -52,14 +53,11 @@ class Home extends Component {
           Your access token is {this.state.accessToken}
         </Text>
 
-        <TouchableHighlight
-          style={styles.submitButton}
+        <Button
           onPress={this.onLogoutPress.bind(this)}
         >
-          <Text style={styles.buttonText}>
-            Logout
-          </Text>
-        </TouchableHighlight>
+          Logout
+        </Button>
       </View>
     );
   }
